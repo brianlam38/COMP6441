@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 int main(int argc, char *argv[]) {
 
@@ -22,7 +23,6 @@ int main(int argc, char *argv[]) {
 		}
 		fclose(file1);
 	}
-	printf("Number of chars = %d\n", count);
 
 	// Create an array to store text
 	char *array = malloc(sizeof(char) * count);
@@ -38,15 +38,22 @@ int main(int argc, char *argv[]) {
 		fclose(file2);
 	}
 
-	// Encryption based on shift#
-	int shift;
-	scanf("Enter in your shift #:%d\n", &shift);
+	// Ask user for shift val
+	//int shift = scanf("Enter in your shift #:%d\n", &shift);
+	//printf("Shift value = %d\n", shift);
+
+	// Encrypt text based on shift val
 	for (int k = 0; k < count; k++) {
-		array
+		array[k] = array[k] + 2;
+		// printf("%c", array[k]);		
+	}
+
+	for (int m = 0; m < count; m++) {
+		printf("%c", array[m]);
 	}
 
 	// Free array memory
-	free(array);
+	// free(array);
 
 	return EXIT_SUCCESS;
 }
