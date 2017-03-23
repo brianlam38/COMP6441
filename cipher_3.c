@@ -1,13 +1,17 @@
-// Freeman Dyson cipher?
-
-// Caesar cipher shift.
+/*	Caesar Cipher encryption tool
+ *	
+ *	This program reads in a text file, shifts characters
+ *	depending on the shift# that the user selects and then
+ *	returns the encrypted text.
+ *
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
 
-	// Count num chars in file
+	// Count num chars in text file
 	char c;
 	int count = 0;
 	FILE *file1;
@@ -18,13 +22,13 @@ int main(int argc, char *argv[]) {
 		}
 		fclose(file1);
 	}
-
 	printf("Number of chars = %d\n", count);
 
-	// Create array of size count to store all chars
+	// Create an array to store text
 	char *array = malloc(sizeof(char) * count);
+	assert(array != NULL);
 
-	// Store text file into array
+	// Store text into array
 	FILE *file2;
 	file2 = fopen("cipher3.txt", "r");
 	if (file2) {
@@ -34,12 +38,15 @@ int main(int argc, char *argv[]) {
 		fclose(file2);
 	}
 
-	// TEST IF ARRAY SCANNED CORRECTLY
-	// for (int j = 0; j < count; j++) {
-	// 	printf("%c", array[j]);
-	// }
+	// Encryption based on shift#
+	int shift;
+	scanf("Enter in your shift #:%d\n", &shift);
+	for (int k = 0; k < count; k++) {
+		array
+	}
 
-	
+	// Free array memory
+	free(array);
 
 	return EXIT_SUCCESS;
 }
