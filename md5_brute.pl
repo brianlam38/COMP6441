@@ -8,6 +8,8 @@
 # Info[1] : Written under Kubuntu Linux (Throw away Windows!)
 # Info[2] : If you can code a bit perl, you can modify it to crack sha etc too...
 # Greets to: Invisible!
+
+
 $ver = "01";
 $dbgtmr = "1"; #Intervall of showing the current speed + lastpassword in seconds.
 
@@ -15,6 +17,7 @@ if ($dbgtmr<=0){ die "Set dbgtmr to a value >=1 !\n";};
 use Digest::MD5 qw(md5_hex);
 use Time::HiRes qw(gettimeofday);
 
+# Select password charset as program options
 if ($ARGV[0]=~"a") {
  $alpha = "abcdefghijklmnopqrstuvwxyz";}
 if ($ARGV[0]=~"A") {
@@ -24,12 +27,15 @@ if ($ARGV[0]=~"d") {
 if ($ARGV[0]=~"x") {
  $alpha = $alpha. "!\"\$%&/()=?-.:\\*'-_:.;,";}
 
+# Throw exception for misuse of program
 if ($alpha eq "" or $ARGV[3] eq "") {usage();};
 if (length($ARGV[3]) != 32) { die "Sorry but it seems that the MD5 is not valid!\n";};
 
+# Reflect user input
 print "Selected charset for attack: '$alpha\'\n";
 print "Going to Crack '$ARGV[3]'...\n";
 
+# Run crack subroutine
 for (my $t=$ARGV[1];$t<=$ARGV[2];$t++){
  crack ($t);
 }
@@ -58,15 +64,16 @@ sub usage{
  die "Quitting...\n";
 }
 
-sub crack{
+# Main MD5 crack subroutine
+sub crack {
  $CharSet = shift;
  @RawString = ();
- for (my $i =0;$i<$CharSet;$i++){ $RawString[i] = 0;}
+ for (my $i =0; $i < $CharSet; $i++) { $RawString[i] = 0;}
  $Start = gettimeofday();
- do{
-  for (my $i =0;$i<$CharSet;$i++){
-   if ($RawString[$i] > length($alpha)-1){
-    if ($i==$CharSet-1){
+ do {
+  for (my $i =0; $i < $CharSet; $i++) {
+   if ($RawString[$i] > length($alpha) -1) {
+    if ($i == $CharSet-1) {
     print "Bruteforcing done with $CharSet Chars. No Results.\n";
     $cnt=0;
     return false;
